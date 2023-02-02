@@ -1,5 +1,11 @@
 import { Flex } from '@chakra-ui/react';
-import { ChatBody, GradientOne, GradientTwo, Header } from './components';
+import {
+  ChatBody,
+  ChatInput,
+  GradientOne,
+  GradientTwo,
+  Header
+} from './components';
 import './App.css';
 
 const App = (): JSX.Element => {
@@ -21,7 +27,7 @@ const App = (): JSX.Element => {
 
       <ChatBody />
 
-      <div>kkk</div>
+      <ChatInput />
     </Flex>
   );
 };
