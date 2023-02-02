@@ -1,5 +1,6 @@
 import { Flex } from '@chakra-ui/react';
-import { GradientOne, GradientTwo, Header } from './components';
+import { ChatBody, GradientOne, GradientTwo, Header } from './components';
+import './App.css';
 
 const App = (): JSX.Element => {
   return (
@@ -15,7 +16,12 @@ const App = (): JSX.Element => {
     >
       <GradientOne />
       <GradientTwo />
+
       <Header />
+
+      <ChatBody />
+
+      <div>kkk</div>
     </Flex>
   );
 };
