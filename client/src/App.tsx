@@ -1,4 +1,5 @@
 import { Flex } from '@chakra-ui/react';
+
 import {
   ChatBody,
   ChatInput,
@@ -7,8 +8,31 @@ import {
   Header
 } from './components';
 import './App.css';
+import { useState } from 'react';
+import { useMutation } from 'react-query';
+import { aiResponse } from './api';
 
 const App = (): JSX.Element => {
+  const [chatMessage, setChatMessage] = useState<any>([]);
+  const mutation = useMutation({
+    mutationFn: () => {
+      return aiResponse(chatMessage);
+    },
+    onSuccess: (data) => {
+      setChatMessage((prevState: any) => [
+        ...prevState,
+        { sender: 'ai', message: data.message.replace(/^\n\n/, '') }
+      ]);
+    }
+  });
+
+  const sendMessage = async (message: string) => {
+    await Promise.resolve(
+      setChatMessage((prevState: any) => [...prevState, message])
+    );
+    mutation.mutate();
+  };
+
   return (
     <Flex
       w="100vw"
@@ -25,9 +49,9 @@ const App = (): JSX.Element => {
 
       <Header />
 
-      <ChatBody />
+      <ChatBody chat={chatMessage} />
 
-      <ChatInput />
+      <ChatInput sendMessage={sendMessage} loading={mutation.isLoading} />
     </Flex>
   );
 };
