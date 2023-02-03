@@ -15,8 +15,8 @@ import { aiResponse } from './api';
 const App = (): JSX.Element => {
   const [chatMessage, setChatMessage] = useState<any>([]);
   const mutation = useMutation({
-    mutationFn: () => {
-      return aiResponse(chatMessage);
+    mutationFn: async () => {
+      return await aiResponse(chatMessage);
     },
     onSuccess: (data) => {
       setChatMessage((prevState: any) => [

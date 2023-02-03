@@ -5,7 +5,7 @@ const openAiRoutes = Router();
 
 const config = new Configuration({
   organization: "org-Nz7W9DskSI21ll8Qo2M02G4L",
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openAiApi = new OpenAIApi(config);
