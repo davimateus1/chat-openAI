@@ -1,10 +1,11 @@
-const apiKey = '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';
+const apiKey = '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';
 
 export const aiResponse = async (chat: any) => {
   try {
     const response = await fetch('http://localhost:3000', {
       method: 'POST',
       headers: {
+        // eslint-disable-next-line
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json'
       },

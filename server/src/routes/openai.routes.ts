@@ -5,13 +5,13 @@ const openAiRoutes = Router();
 
 const config = new Configuration({
   organization: "org-Nz7W9DskSI21ll8Qo2M02G4L",
-  apiKey: "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",
+  apiKey: "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",
 });
 
 const openAiApi = new OpenAIApi(config);
 
 openAiRoutes.get("/", (_, res: Response) => {
-  res.send("Hello World!");
+  res.send();
 });
 
 openAiRoutes.post("/", async (req: Request, res: Response) => {
