@@ -1,4 +1,4 @@
-const apiKey = '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';
+const apiKey = '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';
 
 export const aiResponse = async (chat: any) => {
   try {
