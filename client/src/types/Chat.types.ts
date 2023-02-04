@@ -1,9 +1,14 @@
+export enum Sender {
+  AI = 'ai',
+  USER = 'user'
+}
+
 export type ChatBodyProps = {
   chat: Chat[];
 };
 
 export type Chat = {
-  sender: string;
+  sender: Sender | string;
   message: string;
 };
 

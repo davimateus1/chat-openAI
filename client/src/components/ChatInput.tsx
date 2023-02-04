@@ -1,7 +1,7 @@
 import { Flex, Textarea, Icon, Spinner } from '@chakra-ui/react';
 import { useState } from 'react';
 import { IoSendSharp } from 'react-icons/io5';
-import { ChatInputProps } from '../types';
+import { ChatInputProps, Sender } from '../types';
 
 export const ChatInput = ({
   sendMessage,
@@ -11,7 +11,7 @@ export const ChatInput = ({
 
   const handleSubmitMessage = (): void => {
     if (inputValue.trim() === '') return;
-    sendMessage({ sender: 'user', message: inputValue });
+    sendMessage({ sender: Sender.USER, message: inputValue });
     setInputValue('');
   };
 
@@ -20,7 +20,7 @@ export const ChatInput = ({
       <Flex
         direction="column"
         w="full"
-        bg="rgbaWhite"
+        bg="rgbaWhite01"
         maxH="40rem"
         overflow="auto"
         position="relative"
@@ -40,6 +40,7 @@ export const ChatInput = ({
               resize="none"
               color="white"
               value={inputValue}
+              placeholder="Type your message..."
               typeof="text"
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => {

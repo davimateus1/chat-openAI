@@ -1,17 +1,17 @@
 import { Flex, Text } from '@chakra-ui/react';
 import autoAnimate from '@formkit/auto-animate';
 import { useEffect, useRef } from 'react';
-import { ChatBodyProps, Message } from '../types';
+import { ChatBodyProps, Message, Sender } from '../types';
+
+const aiStyle = {
+  backgroundColor: 'rgbaWhite04',
+  backdropFilter: 'blur(30px)',
+  dropShadow: 'shadow',
+  color: 'black'
+};
 
 export const ChatBody = ({ chat }: ChatBodyProps): JSX.Element => {
-  const aiStyle = {
-    backgroundColor: 'rgba(255, 255, 255, 0.4)',
-    backdropFilter: 'blur(30px)',
-    dropShadow: '(0px 0px 10px rgba(0, 0, 0, 0.25))',
-    color: 'black'
-  };
-
-  const isAi = (message: Message): boolean => message?.sender === 'ai';
+  const isAi = (message: Message): boolean => message?.sender === Sender.AI;
 
   const reference = useRef<HTMLDivElement>(null);
   const bottomReference = useRef<HTMLDivElement>(null);

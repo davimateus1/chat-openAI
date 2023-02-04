@@ -11,7 +11,7 @@ import './App.css';
 import { SetStateAction, useState } from 'react';
 import { useMutation } from 'react-query';
 import { aiResponse } from './api';
-import { Chat, Message } from './types';
+import { Chat, Message, Sender } from './types';
 
 const App = (): JSX.Element => {
   const [chatMessage, setChatMessage] = useState<Chat[]>([]);
@@ -23,18 +23,17 @@ const App = (): JSX.Element => {
     onSuccess: (data) => {
       setChatMessage((prevState) => [
         ...prevState,
-        { sender: 'ai', message: data.message.replace(/^\n\n/, '') }
+        { sender: Sender.AI, message: data.message.replace(/^\n\n/, '') }
       ]);
     }
   });
 
   const sendMessage = async (message: Message): Promise<void> => {
-    await Promise.resolve(
-      setChatMessage((prevState: SetStateAction<Chat[]>) => [
-        ...(prevState as Chat[]),
-        message
-      ])
-    );
+    const newChat = (prevState: SetStateAction<Chat[]>): Chat[] => [
+      ...(prevState as Chat[]),
+      message
+    ];
+    await Promise.resolve(setChatMessage(newChat));
     mutate();
   };
 
