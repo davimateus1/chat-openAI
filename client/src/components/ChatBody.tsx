@@ -1,8 +1,9 @@
 import { Flex, Text } from '@chakra-ui/react';
 import autoAnimate from '@formkit/auto-animate';
 import { useEffect, useRef } from 'react';
+import { ChatBodyProps, Message } from '../types';
 
-export const ChatBody = ({ chat }): JSX.Element => {
+export const ChatBody = ({ chat }: ChatBodyProps): JSX.Element => {
   const aiStyle = {
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
     backdropFilter: 'blur(30px)',
@@ -10,17 +11,15 @@ export const ChatBody = ({ chat }): JSX.Element => {
     color: 'black'
   };
 
-  const isAi = (message: any) => message.sender === 'ai';
+  const isAi = (message: Message): boolean => message?.sender === 'ai';
+
   const reference = useRef<HTMLDivElement>(null);
   const bottomReference = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     reference.current && autoAnimate(reference.current);
-  }, [reference]);
-
-  useEffect(() => {
     bottomReference.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [chat]);
+  }, [reference, chat]);
 
   return (
     <Flex
@@ -33,7 +32,7 @@ export const ChatBody = ({ chat }): JSX.Element => {
       p="3rem 2rem 0 2rem"
       ref={reference}
     >
-      {chat.map((message: any, index: number) => (
+      {chat.map((message, index) => (
         <Flex
           align={isAi(message) ? 'start' : 'end'}
           direction="column"
@@ -42,7 +41,7 @@ export const ChatBody = ({ chat }): JSX.Element => {
           <Flex
             justify="center"
             border="1px solid"
-            borderColor="#999999"
+            borderColor="grayColor"
             wordBreak="break-word"
             maxW="80%"
             p="2rem"
@@ -50,7 +49,7 @@ export const ChatBody = ({ chat }): JSX.Element => {
             backdropFilter="blur(30px)"
             sx={isAi(message) ? { ...aiStyle } : {}}
           >
-            <Text color="white">{message.message}</Text>
+            <Text color="white">{message?.message}</Text>
           </Flex>
         </Flex>
       ))}

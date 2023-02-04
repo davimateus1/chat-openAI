@@ -1,1 +1,2 @@
-export * from './ChatBody.types';
+export * from './Chat.types';
+export * from './Api.types';

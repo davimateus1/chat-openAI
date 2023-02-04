@@ -1,15 +1,9 @@
+import { Chat, Params } from '../types';
 import { api } from './api';
 
-type Params = Array<{
-  sender: string;
-  message: string;
-}>;
-
-export const aiResponse = async (
-  chat: Params
-): Promise<{ message: string }> => {
+export const aiResponse = async (chat: Params): Promise<Chat> => {
   const response = await api.post('/', {
-    message: chat.map((message) => message.message).join(' \n ')
+    message: chat.map((message) => message?.message).join(' \n ')
   });
 
   return response.data;

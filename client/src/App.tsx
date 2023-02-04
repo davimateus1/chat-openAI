@@ -8,29 +8,34 @@ import {
   Header
 } from './components';
 import './App.css';
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { useMutation } from 'react-query';
 import { aiResponse } from './api';
+import { Chat, Message } from './types';
 
 const App = (): JSX.Element => {
-  const [chatMessage, setChatMessage] = useState<any>([]);
-  const mutation = useMutation({
+  const [chatMessage, setChatMessage] = useState<Chat[]>([]);
+
+  const { mutate, isLoading } = useMutation({
     mutationFn: async () => {
       return await aiResponse(chatMessage);
     },
     onSuccess: (data) => {
-      setChatMessage((prevState: any) => [
+      setChatMessage((prevState) => [
         ...prevState,
         { sender: 'ai', message: data.message.replace(/^\n\n/, '') }
       ]);
     }
   });
 
-  const sendMessage = async (message: string) => {
+  const sendMessage = async (message: Message): Promise<void> => {
     await Promise.resolve(
-      setChatMessage((prevState: any) => [...prevState, message])
+      setChatMessage((prevState: SetStateAction<Chat[]>) => [
+        ...(prevState as Chat[]),
+        message
+      ])
     );
-    mutation.mutate();
+    mutate();
   };
 
   return (
@@ -51,7 +56,7 @@ const App = (): JSX.Element => {
 
       <ChatBody chat={chatMessage} />
 
-      <ChatInput sendMessage={sendMessage} loading={mutation.isLoading} />
+      <ChatInput sendMessage={sendMessage} loading={isLoading} />
     </Flex>
   );
 };
