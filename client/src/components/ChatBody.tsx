@@ -6,7 +6,7 @@ import { ChatBodyProps, Message, Sender } from '../types';
 const aiStyle = {
   backgroundColor: 'rgbaWhite04',
   backdropFilter: 'blur(30px)',
-  dropShadow: 'shadow',
+  dropShadow: '(0px 0px 10px shadow)',
   color: 'black'
 };
 
