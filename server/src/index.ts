@@ -4,9 +4,7 @@ import bodyParser from "body-parser";
 import env from "dotenv";
 import { openAiRoutes } from "./routes/openai.routes";
 
-env.config({
-  path: "C:UsersDaviDocumentsGithubchat-openAIserver.env",
-});
+env.config();
 
 const app = express();
 

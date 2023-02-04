@@ -10,11 +10,11 @@ const config = new Configuration({
 
 const openAiApi = new OpenAIApi(config);
 
-openAiRoutes.get("/", (_, res: Response) => {
+openAiRoutes.get("/", (_, res: Response): void => {
   res.send();
 });
 
-openAiRoutes.post("/", async (req: Request, res: Response) => {
+openAiRoutes.post("/", async (req: Request, res: Response): Promise<void> => {
   const { message } = req.body;
 
   try {
